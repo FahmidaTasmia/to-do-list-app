@@ -113,5 +113,5 @@ searchBar.addEventListener("input", (e) => {
       task.style.display = taskText.includes(query) ? "flex" : "none";
     });
   });
-
+  
 
