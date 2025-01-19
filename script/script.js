@@ -1,7 +1,11 @@
 //dom elements
 
 const darkModeToggle = document.getElementById("dark-mode-toggle");
-
+const taskInput = document.getElementById("new-task");
+const addTaskButton = document.getElementById("add-task");
+const taskList = document.getElementById("task-list");
+const categorySelect = document.getElementById("category-select");
+const searchBar = document.getElementById("search-bar");
 
 //check local storage for dark mode preference
 
@@ -45,6 +49,58 @@ darkModeToggle.addEventListener("click", ()=>{
 
     // update button icon 
     updateIcon();
+});
+
+// add a new Task
+
+addTaskButton.addEventListener("click",()=>{
+    const taskText = taskInput.value.trim();
+    const taskCategory = categorySelect.value;
+
+    if(!taskText)
+        return;
+
+    // create a new task Item
+    const taskItem = document.createElement("li");
+    taskItem.className="flex justify-between items center bg-gray-200 dark:bg-gray-700 p-2 rounded shadow cursor-move";
+    taskItem.dataset.category = taskCategory;
+
+    //add Task Content
+
+    taskItem.innerHTML =`
+    <span class="flex-1">${taskText}</span>
+    <span class="text-sm  mr-3 text-gray-600 dark:text-gray-300">${taskCategory}</span>
+    <div class="flex gap-4">
+      <button class="complete-btn text-green-700"><i class="fas fa-check"></i></button>
+      <button class="edit-btn text-orange-400"><i class="fas fa-edit"></i></button>
+      <button class="delete-btn text-red-600"><i class="fas fa-trash-alt"></i></button>
+    </div>
+  `;
+
+    //Add Event Listener for task Actions
+    //completeButton
+    const completeButton = taskItem.querySelector(".complete-btn");
+    completeButton.addEventListener("click", ()=>{
+        taskItem.querySelector("span").classList.toggle("line-through");
+    });
+
+    //edit button
+    const editButton = taskItem.querySelector(".edit-btn");
+    editButton.addEventListener("click", ()=>{
+        const newText = prompt("Edit Task", taskText);
+        if(newText) taskItem .querySelector("span").textContent = newText;
+    });
+
+    //delete button
+    const deleteButton = taskItem.querySelector(".delete-btn");
+    deleteButton.addEventListener("click", ()=>{
+        taskItem.remove();
+    });
+
+    //Append to task List
+    taskList.appendChild(taskItem);
+    taskInput.value=""; // clear Input
+
 });
 
 
