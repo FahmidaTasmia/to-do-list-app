@@ -1,4 +1,4 @@
-# TaskMaster #To-do-List-Ap
+# To-do-List-Ap
 ### 🚀 Project Overview
 
 It is an interactive task management web application designed to enhance productivity and task organization. With features like dark mode, category-based task organization, and real-time search, TaskMaster aims to provide a seamless user experience while maintaining a modern, responsive design.
