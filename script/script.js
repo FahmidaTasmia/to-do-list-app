@@ -104,3 +104,14 @@ addTaskButton.addEventListener("click",()=>{
 });
 
 
+// Search Bar
+searchBar.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
+    const tasks = taskList.querySelectorAll("li");
+    tasks.forEach((task) => {
+      const taskText = task.querySelector("span").textContent.toLowerCase();
+      task.style.display = taskText.includes(query) ? "flex" : "none";
+    });
+  });
+
+
